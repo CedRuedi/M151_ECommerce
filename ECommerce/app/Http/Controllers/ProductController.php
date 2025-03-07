@@ -24,8 +24,14 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        return view('products.show', compact('product'));
+        $product = Product::with('reviews.user')->findOrFail($id);
+        $reviews = $product->reviews; 
+    
+        // Calcola la media delle recensioni
+        $averageRating = $reviews->avg('rating') ?? 0; 
+    
+        return view('products.show', compact('product', 'reviews', 'averageRating'));
     }
+    
     
 }

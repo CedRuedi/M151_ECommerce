@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +32,8 @@ Route::put('/admin/products/{id}', [AdminController::class, 'update'])->name('ad
 
 Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.delete');
 Route::delete('/admin/products/{product}', [AdminController::class, 'destroy'])->name('admin.products.delete');
+
+Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::middleware(['auth', 'admin'])->group(function () {
 });
