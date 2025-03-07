@@ -7,7 +7,7 @@
         <div class="flex flex-col md:flex-row items-center md:items-start gap-12 w-full max-w-6xl px-4">
             <!-- Immagine del prodotto -->
             <div class="flex justify-center md:justify-end w-full md:w-1/2">
-                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="w-96 h-auto rounded-lg shadow-lg">
+                <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="w-96 h-auto rounded-lg shadow-lg">
             </div>
 
             <!-- Dettagli del prodotto -->

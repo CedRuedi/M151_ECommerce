@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\CartItem;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
+use App\Models\Role;
 
 class DashboardController extends Controller
 {
@@ -28,6 +32,12 @@ class DashboardController extends Controller
                                  ->take(5)
                                  ->get();
 
-        return view('dashboard.index', compact('user', 'ordersCount', 'cartItemsCount', 'totalSpent', 'recentActivities'));
+                                 
+        $products = Product::with('category')->get();
+        $categories = Category::all();
+        $users = User::with('roles')->get();
+        $roles = Role::all();
+
+        return view('dashboard.index', compact('user', 'ordersCount', 'cartItemsCount', 'totalSpent', 'recentActivities','products','categories','users','roles'));
     }
 }

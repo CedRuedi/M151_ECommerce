@@ -22,7 +22,7 @@
                     <div class="flex items-center justify-between">
                         <!-- Dettagli del prodotto -->
                         <div class="flex items-center">
-                            <img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" class="w-24 h-24 rounded-lg shadow-sm">
+                            <img src="{{ asset('storage/'.$item->product->image) }}" alt="{{ $item->product->name }}" class="w-24 h-24 rounded-lg shadow-sm">
                             <div class="ml-6">
                                 <h2 class="text-lg font-bold text-gray-800">{{ $item->product->name }}</h2>
                                 <p class="text-sm text-gray-500">{{ $item->product->description }}</p>

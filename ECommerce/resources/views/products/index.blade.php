@@ -28,11 +28,11 @@
     </div>
 </div>
 
-    <div class="flex justify-center px-6">
+    <div class="flex justify-center px-6" style="margin-bottom: 40px">
         <div class="grid gap-6 px-6" style="grid-template-columns: repeat(3, minmax(300px, 460px));">
             @foreach ($products as $product)
                 <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
-                    <img class="w-full h-48 object-cover" src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                    <img class="w-full h-48 object-cover" src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}">
                     <div class="p-4">
                         <h5 class="text-lg font-bold text-gray-800">{{ $product->name }}</h5>
                         <p class="text-sm text-gray-600 mt-2">{{ $product->description }}</p>
