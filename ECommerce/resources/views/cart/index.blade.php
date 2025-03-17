@@ -5,8 +5,8 @@
 @section('content')
     <style>
         select {
-            padding: 5px 20px; /* Aggiunge spazio ai lati */
-            min-width: 60px; /* Larghezza minima per evitare la sovrapposizione */
+            padding: 5px 20px;
+            min-width: 60px;
         }
     </style>
 
@@ -20,7 +20,6 @@
             @if ($item->product)
                 <div class="bg-white shadow-md rounded-lg p-6 mb-4">
                     <div class="flex items-center justify-between">
-                        <!-- Dettagli del prodotto -->
                         <div class="flex items-center">
                             <img src="{{ asset('storage/'.$item->product->image) }}" alt="{{ $item->product->name }}" class="w-24 h-24 rounded-lg shadow-sm">
                             <div class="ml-6">
@@ -31,7 +30,6 @@
                             </div>
                         </div>
         
-                        <!-- Sezione quantità e azioni -->
                         <div class="flex items-center space-x-4">
                             <form action="{{ route('cart.update', $item->product->id) }}" method="POST" class="flex items-center space-x-2">
                                 @csrf

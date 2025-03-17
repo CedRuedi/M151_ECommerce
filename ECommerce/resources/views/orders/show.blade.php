@@ -6,7 +6,6 @@
     <div class="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg" style="margin-top: 30px">
         <h1 class="text-3xl font-bold text-center mb-6">Dettaglio Ordine</h1>
 
-        <!-- Informazioni generali sull'ordine -->
         <div class="bg-gray-100 p-4 rounded-lg shadow-sm mb-6">
             <p class="text-lg"><strong>ID Ordine:</strong> {{ $order->id }}</p>
             <p class="text-lg"><strong>Codice Ordine:</strong> <span class="text-blue-500 font-semibold">{{ $order->order_code }}</span></p>
@@ -15,7 +14,6 @@
             <p class="text-lg"><strong>Data:</strong> {{ $order->created_at->format('d/m/Y') }}</p>
         </div>
 
-        <!-- Tabella dei prodotti nell'ordine -->
         <h2 class="text-2xl font-bold mb-4">Prodotti Ordinati</h2>
         <div class="overflow-x-auto">
             <table class="w-full border-collapse rounded-lg shadow-lg">
@@ -40,7 +38,6 @@
             </table>
         </div>
 
-        <!-- Pulsante per tornare agli ordini -->
         <div class="mt-6 text-center">
             <a href="{{ route('orders.index') }}" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition duration-200">
                 Torna ai tuoi ordini

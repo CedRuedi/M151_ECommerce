@@ -12,13 +12,11 @@ class Review extends Model
 
     protected $fillable = ['user_id', 'product_id', 'rating', 'comment'];
 
-    // Una recensione appartiene a un utente
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Una recensione appartiene a un prodotto
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

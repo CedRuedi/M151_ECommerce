@@ -13,13 +13,11 @@ class Product extends Model
 
     protected $fillable = ['name', 'description', 'price', 'stock', 'category_id', 'image'];
 
-    // Relazione con la categoria
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Relazione con le recensioni
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);

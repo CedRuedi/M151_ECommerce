@@ -6,7 +6,6 @@
     <div class="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg" style="margin-top: 30px">
         <h2 class="text-2xl font-bold mb-6">Conferma il tuo Ordine</h2>
 
-        <!-- Mostra i prodotti nel carrello -->
         <div class="mb-6">
             @foreach ($cartItems as $item)
                 @if(isset($item->product) && $item->product)
@@ -30,7 +29,6 @@
             @endforeach
         </div>
 
-        <!-- Dettagli di spedizione -->
         <div class="mb-6 p-4 bg-gray-100 rounded-lg">
             <h3 class="text-xl font-semibold mb-2">Indirizzo di Spedizione</h3>
 
@@ -41,7 +39,6 @@
                 <p><strong>CAP:</strong> {{ Auth::user()->zip_code }}</p>
                 <p><strong>Città:</strong> {{ Auth::user()->city }}</p>
             @else
-                <!-- Se è un guest, mostra il form per inserire i dati -->
                 <form action="{{ route('orders.finalize') }}" method="POST">
                     @csrf
 
@@ -82,7 +79,6 @@
             @endif
         </div>
 
-        <!-- Bottone di conferma solo per utenti autenticati -->
         @if(Auth::user())
             <form action="{{ route('orders.finalize') }}" method="POST">
                 @csrf

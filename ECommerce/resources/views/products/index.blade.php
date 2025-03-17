@@ -4,13 +4,10 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto py-8 px-6">
-    <!-- Sezione Titolo e Ricerca -->
     <div class="flex flex-col md:flex-row items-center justify-between mb-8 bg-white shadow-md rounded-lg p-6">
-        <!-- Titolo -->
         <h1 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">
             Lista Prodotti
         </h1>
-        <!-- Campo di Ricerca -->
         <form method="GET" action="{{ route('products.index') }}" class="flex items-center w-full md:w-auto">
             <input 
                 type="text" 

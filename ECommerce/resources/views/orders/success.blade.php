@@ -7,19 +7,16 @@
         <h2 class="text-2xl font-bold text-green-600 mb-4">Ordine Confermato!</h2>
         <p class="text-lg text-gray-700 mb-6">Il tuo ordine è stato completato con successo.</p>
 
-        <!-- Mostra il codice ordine -->
         @if(session('order_code'))
             <p class="text-lg font-bold text-gray-800 mb-4">Codice Ordine: <span class="text-blue-600">{{ session('order_code') }}</span></p>
         @endif
 
         @if(Auth::check())
-            <!-- Se l'utente è autenticato -->
             <p class="text-gray-700 mb-4">Puoi visualizzare i dettagli del tuo ordine accedendo alla tua pagina ordini.</p>
             <a href="{{ route('orders.index') }}" class="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold">
                 Vai ai miei ordini
             </a>
         @else
-            <!-- Se è un guest -->
             <p class="text-gray-700 mb-4">Una email con i dettagli del tuo ordine è stata inviata a <strong>{{ session('guest_email') }}</strong>.</p>
             <p class="text-gray-500">Se non la vedi, controlla la cartella spam.</p>
             <a href="{{ route('products.index') }}" class="mt-4 inline-block text-blue-500 underline">Torna ai prodotti</a>

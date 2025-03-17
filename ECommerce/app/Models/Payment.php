@@ -12,7 +12,6 @@ class Payment extends Model
 
     protected $fillable = ['order_id', 'payment_method', 'transaction_id', 'amount'];
 
-    // Un pagamento è associato a un ordine
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

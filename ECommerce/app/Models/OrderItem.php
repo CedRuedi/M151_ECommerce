@@ -12,13 +12,11 @@ class OrderItem extends Model
 
     protected $fillable = ['order_id', 'product_id', 'quantity', 'price'];
 
-    // Un dettaglio ordine appartiene a un ordine
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
 
-    // Un dettaglio ordine appartiene a un prodotto
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

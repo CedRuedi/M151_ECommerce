@@ -57,11 +57,8 @@
     </div>
 
 
-    <!-- Bottone per Aprire la Modale -->
     <button onclick="openModal('add')" class="bg-green-500 text-white px-4 py-2 rounded" style="width: 100%">Aggiungi Prodotto</button>
 
-    <!-- Modale -->
-    <!-- Modale Aggiunta -->
     <div id="productModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
         <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
             <h2 class="text-xl font-bold mb-4" id="modalTitle">Aggiungi un nuovo prodotto</h2>
@@ -100,7 +97,6 @@
         </div>
     </div>
 
-    <!-- Tabella dei prodotti -->
     <table class="w-full bg-white shadow-md rounded-lg mt-4">
         <thead>
             <tr class="bg-gray-200 text-gray-700">
@@ -134,7 +130,6 @@
     </table>
 </div>
 
-<!-- JavaScript per la gestione della modale -->
 <script>
 
     function openModal(mode, product = null) {
@@ -151,9 +146,8 @@
         } else if (mode === 'edit' && product) {
             title.innerText = "Modifica Prodotto";
             form.action = `/admin/products/${product.id}`;
-            document.getElementById('methodField').value = "PUT"; // Cambia il metodo in PUT
+            document.getElementById('methodField').value = "PUT";
 
-            // Assicura che i campi vengano riempiti
             document.getElementById('productName').value = product.name;
             document.getElementById('productDescription').value = product.description;
             document.getElementById('productPrice').value = product.price;

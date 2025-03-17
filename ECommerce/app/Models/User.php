@@ -52,7 +52,6 @@ class User extends Authenticatable
     }
     
 
-    // Metodo per controllare se l'utente ha un ruolo specifico
     public function hasRole($roleName)
     {
         return $this->roles()->where('name', $roleName)->exists();
@@ -60,13 +59,11 @@ class User extends Authenticatable
     
     
 
-    // Un utente può avere più ordini
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
-    // Un utente può scrivere più recensioni
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);

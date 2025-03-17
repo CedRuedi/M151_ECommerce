@@ -16,7 +16,7 @@ class AdminController extends Controller
             'role_id' => 'required|exists:roles,id',
         ]);
 
-        $user->roles()->sync([$request->role_id]); // Rimuove i ruoli precedenti e assegna il nuovo
+        $user->roles()->sync([$request->role_id]);
 
         ActivityLogController::log('Cambio Ruolo', "L'utente ha cambiato il ruolo di {$user->name} a {$request->role_id}");
 
@@ -42,7 +42,6 @@ class AdminController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
     
-            // Controlla se l'immagine è stata caricata
             if (!$request->hasFile('image')) {
                 return back()->with('error', 'Errore: Nessuna immagine caricata.');
             }
@@ -86,7 +85,7 @@ class AdminController extends Controller
     
         $product = Product::findOrFail($id);
         
-        // Aggiorna i dati del prodotto
+        
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
@@ -95,7 +94,7 @@ class AdminController extends Controller
             'category_id' => $request->category_id,
         ]);
     
-        // Se c'è un'immagine nuova, aggiornala
+        
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('prod_img', 'public');
             $product->update(['image' => $imagePath]);

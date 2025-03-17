@@ -12,7 +12,6 @@ class ActivityLog extends Model
 
     protected $fillable = ['user_id', 'action', 'description'];
 
-    // Un log attività può appartenere a un utente (opzionale)
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

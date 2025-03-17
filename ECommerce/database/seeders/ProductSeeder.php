@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg', 
                 'category_id' => 1
             ],
             [
@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg',
                 'category_id' => 1
             ],
             [
@@ -63,7 +63,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg',
                 'category_id' => 1
             ],
             [
@@ -87,7 +87,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg',
                 'category_id' => 1
             ],
             [
@@ -111,7 +111,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg', // 
                 'category_id' => 1
             ],
             [
@@ -135,7 +135,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg', // 
                 'category_id' => 1
             ],
             [
@@ -159,7 +159,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg', 
                 'category_id' => 1
             ],
             [
@@ -183,7 +183,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Ultimo modello con fotocamera avanzata.',
                 'price' => 699.99,
                 'stock' => 10,
-                'image' => 'prod_img/product1.jpg', // ✅ Percorso dell'immagine
+                'image' => 'prod_img/product1.jpg',
                 'category_id' => 1
             ],
             [

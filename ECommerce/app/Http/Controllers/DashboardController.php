@@ -17,16 +17,12 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        // Numero totale di ordini effettuati dall'utente
         $ordersCount = Order::where('user_id', $user->id)->count();
 
-        // Numero totale di prodotti attualmente nel carrello dell'utente
         $cartItemsCount = CartItem::where('user_id', $user->id)->sum('quantity');
 
-        // Somma totale di quanto ha speso l'utente (somma di tutti gli ordini)
         $totalSpent = Order::where('user_id', $user->id)->sum('total_price');
 
-        // Ordini recenti (ultimi 5)
         $recentActivities = Order::where('user_id', $user->id)
                                  ->orderBy('created_at', 'desc')
                                  ->take(5)

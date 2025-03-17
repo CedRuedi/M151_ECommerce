@@ -10,10 +10,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-// Rotta pubblica (Homepage)
+
 Route::get('/', [ProductController::class, 'index'])->name('products.index');
 
-// Rotte per i prodotti (pubbliche)
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/confirm', [OrderController::class, 'confirmOrder'])->name('orders.confirm');
@@ -21,44 +20,37 @@ Route::post('/orders/finalize', [OrderController::class, 'finalizeOrder'])->name
 Route::get('/success', function () {
     return view('orders.success');
 })->name('orders.success');
-// Rotte per gli utenti autenticati (profilo, ordini, dashboard)
+
 Route::middleware('auth')->group(function () {
     
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Profilo utente
+   
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Ordini
+   
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-
-    // Recensioni sui prodotti
     Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });
 
-// Rotte per il carrello (pubbliche ma con azioni autenticate)
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::put('/cart/update/{productId}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{productId}', [CartController::class, 'remove'])->name('cart.remove');
 
-// Rotte per l'amministrazione (solo per gli admin)
 Route::middleware(['auth', 'admin'])->group(function () {
-    // Gestione utenti
+    
     Route::post('/admin/users/{user}/assign-role', [AdminController::class, 'assignRole'])->name('admin.assignRole');
     Route::delete('/admin/users/{user}', [AdminController::class, 'destroyUser'])->name('admin.users.delete');
 
-    // Gestione prodotti
     Route::post('/admin/products/store', [AdminController::class, 'store'])->name('admin.products.store');
     Route::get('/admin/products/{id}/edit', [AdminController::class, 'edit'])->name('admin.products.edit');
     Route::put('/admin/products/{id}', [AdminController::class, 'update'])->name('admin.products.update');
     Route::delete('/admin/products/{product}', [AdminController::class, 'destroy'])->name('admin.products.delete');
 
-    // Log attività
     Route::get('/admin/logs', [ActivityLogController::class, 'index'])->name('admin.logs');
 });
 
-// Importa le rotte di autenticazione di Laravel
 require __DIR__.'/auth.php';

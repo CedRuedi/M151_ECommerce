@@ -5,12 +5,10 @@
 @section('content')
     <div class="min-h-screen flex justify-center" style="margin-top: 50px">
         <div class="flex flex-col md:flex-row items-center md:items-start gap-12 w-full max-w-6xl px-4">
-            <!-- Immagine del prodotto -->
             <div class="flex justify-center md:justify-end w-full md:w-1/2">
                 <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" class="w-96 h-auto rounded-lg shadow-lg">
             </div>
 
-            <!-- Dettagli del prodotto -->
             <div class="w-full md:w-1/2">
                 <h1 class="text-4xl font-bold text-gray-800">{{ $product->name }}</h1>
                 <p class="text-lg text-gray-500 mt-2">{{ $product->description }}</p>
@@ -18,7 +16,6 @@
                 <ul class="mt-4 text-gray-600 space-y-2">
                     <li>Disponibilità: <span class="text-green-600 font-semibold">{{ $product->stock }}</span></li>
                 </ul>
-                <!-- MEDIA RECENSIONI -->
                 <div class="flex items-center mt-4">
                     <span class="text-xl font-semibold">Valutazione Media:</span>
                     <div class="flex items-center text-yellow-400 ml-2">
@@ -30,7 +27,6 @@
                     </div>
                     <span class="text-sm text-gray-600 ml-2">({{ number_format($averageRating, 1) }} su 5)</span>
                 </div>
-                <!-- Pulsante aggiungi al carrello -->
                 <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-6">
                     @csrf
                     <button class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none">
@@ -38,7 +34,6 @@
                     </button>
                 </form><br><br>
                 
-                <!-- Sezione Recensioni -->
                 <div class="max-w-6xl mx-auto mt-12 px-4">
             
                     @if($reviews->isEmpty())
@@ -62,7 +57,6 @@
                     @endif
                 </div>
                 
-                <!-- Pulsante per aggiungere recensione -->
                 @auth
                 <button onclick="openReviewModal()" class="bg-green-500 text-white px-6 py-3 mt-4 rounded-lg">
                     Aggiungi una Recensione
@@ -74,7 +68,6 @@
 
     
 
-    <!-- Modale per aggiungere recensione -->
     <div id="reviewModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
         <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
             <h2 class="text-xl font-bold mb-4">Lascia una Recensione</h2>
@@ -100,7 +93,6 @@
         </div>
     </div>
 
-    <!-- JavaScript per la gestione del modale -->
     <script>
         function openReviewModal() {
             document.getElementById('reviewModal').classList.remove('hidden');
