@@ -65,39 +65,38 @@
     <div id="productModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center">
         <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
             <h2 class="text-xl font-bold mb-4" id="modalTitle">Aggiungi un nuovo prodotto</h2>
-            <form id="productForm" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="productForm" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
-
-                <input type="hidden" id="productId" name="product_id">
-
+                <input type="hidden" name="_method" id="methodField" value="POST">
+            
                 <label class="block mb-2">Nome</label>
                 <input type="text" name="name" id="productName" class="border p-2 w-full rounded" required>
-
+            
                 <label class="block mt-4 mb-2">Descrizione</label>
                 <textarea name="description" id="productDescription" class="border p-2 w-full rounded" required></textarea>
-
+            
                 <label class="block mt-4 mb-2">Prezzo (€)</label>
                 <input type="number" name="price" id="productPrice" step="0.01" class="border p-2 w-full rounded" required>
-
+            
                 <label class="block mt-4 mb-2">Stock</label>
                 <input type="number" name="stock" id="productStock" class="border p-2 w-full rounded" required>
-
+            
                 <label class="block mt-4 mb-2">Categoria</label>
                 <select name="category_id" id="productCategory" class="border p-2 w-full rounded" required>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-
+            
                 <label class="block mt-4 mb-2">Immagine</label>
                 <input type="file" name="image" id="productImage" class="border p-2 w-full rounded">
-
+            
                 <div class="mt-4 flex justify-end space-x-2">
                     <button type="button" onclick="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Annulla</button>
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Salva</button>
                 </div>
             </form>
+            
         </div>
     </div>
 
@@ -147,12 +146,14 @@
             title.innerText = "Aggiungi un nuovo prodotto";
             form.action = "{{ route('admin.products.store') }}";
             form.reset();
-            document.getElementById('productId').value = "";
+            document.getElementById('methodField').value = "POST";
             document.getElementById('productImage').required = true;
-        } else if (mode === 'edit') {
+        } else if (mode === 'edit' && product) {
             title.innerText = "Modifica Prodotto";
             form.action = `/admin/products/${product.id}`;
-            document.getElementById('productId').value = product.id;
+            document.getElementById('methodField').value = "PUT"; // Cambia il metodo in PUT
+
+            // Assicura che i campi vengano riempiti
             document.getElementById('productName').value = product.name;
             document.getElementById('productDescription').value = product.description;
             document.getElementById('productPrice').value = product.price;
@@ -163,6 +164,8 @@
 
         modal.classList.remove('hidden');
     }
+
+
 
     function closeModal() {
         document.getElementById('productModal').classList.add('hidden');

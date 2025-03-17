@@ -18,11 +18,15 @@ class AdminController extends Controller
 
         $user->roles()->sync([$request->role_id]); // Rimuove i ruoli precedenti e assegna il nuovo
 
+        ActivityLogController::log('Cambio Ruolo', "L'utente ha cambiato il ruolo di {$user->name} a {$request->role_id}");
+
         return redirect()->back()->with('success', 'Ruolo aggiornato con successo!');
     }
     public function create()
     {
         $categories = Category::all();
+        
+
         return view('admin.create_product', compact('categories'));
     }
 
@@ -45,7 +49,7 @@ class AdminController extends Controller
     
             $imagePath = $request->file('image')->store('prod_img', 'public');
     
-            Product::create([
+            $product = Product::create([
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
@@ -53,6 +57,8 @@ class AdminController extends Controller
                 'category_id' => $request->category_id,
                 'image' => $imagePath,
             ]);
+
+            ActivityLogController::log('Aggiunta Prodotto', "L'utente ha aggiunto il prodotto: {$product->name}");
     
             return redirect()->route('dashboard')->with('success', 'Prodotto aggiunto con successo!');
         } catch (\Exception $e) {
@@ -69,8 +75,6 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-    
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -80,11 +84,9 @@ class AdminController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
     
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('prod_img', 'public');
-            $product->image = $imagePath;
-        }
-    
+        $product = Product::findOrFail($id);
+        
+        // Aggiorna i dati del prodotto
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
@@ -93,11 +95,22 @@ class AdminController extends Controller
             'category_id' => $request->category_id,
         ]);
     
+        // Se c'è un'immagine nuova, aggiornala
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('prod_img', 'public');
+            $product->update(['image' => $imagePath]);
+        }
+    
         return redirect()->route('dashboard')->with('success', 'Prodotto aggiornato con successo!');
     }
+    
     public function destroy(Product $product)
     {
+        $productName = $product->name;
         $product->delete();
+
+        ActivityLogController::log('Eliminazione Prodotto', "L'utente ha eliminato il prodotto: {$productName}");
+
         return redirect()->route('dashboard')->with('success', 'Prodotto eliminato con successo!');
     }
     

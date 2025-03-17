@@ -9,16 +9,24 @@
         <!-- Mostra i prodotti nel carrello -->
         <div class="mb-6">
             @foreach ($cartItems as $item)
-                <div class="flex items-center justify-between border-b border-gray-300 py-4">
-                    <div class="flex items-center">
-                        <img src="{{ asset('storage/'.$item->product->image) }}" alt="{{ $item->product->name }}" class="w-20 h-20 rounded-lg shadow-sm">
-                        <div class="ml-4">
-                            <h2 class="text-lg font-bold text-gray-800">{{ $item->product->name }}</h2>
-                            <p class="text-sm text-gray-500">Quantità: {{ $item->quantity }}</p>
-                            <p class="text-lg font-bold text-gray-700">{{ number_format($item->product->price * $item->quantity, 2) }} €</p>
+                @if(isset($item->product) && $item->product)
+                    <div class="flex items-center justify-between border-b border-gray-300 py-4">
+                        <div class="flex items-center">
+                            <img src="{{ asset('storage/'.$item->product->image) }}" 
+                                alt="{{ $item->product->name }}" 
+                                class="w-20 h-20 rounded-lg shadow-sm">
+                            <div class="ml-4">
+                                <h2 class="text-lg font-bold text-gray-800">{{ $item->product->name }}</h2>
+                                <p class="text-sm text-gray-500">Quantità: {{ $item->quantity }}</p>
+                                <p class="text-lg font-bold text-gray-700">
+                                    {{ number_format($item->product->price * $item->quantity, 2) }} €
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <p class="text-red-500">Prodotto non disponibile.</p>
+                @endif
             @endforeach
         </div>
 
@@ -34,7 +42,7 @@
                 <p><strong>Città:</strong> {{ Auth::user()->city }}</p>
             @else
                 <!-- Se è un guest, mostra il form per inserire i dati -->
-                <form action="{{ route('order.finalize') }}" method="POST">
+                <form action="{{ route('orders.finalize') }}" method="POST">
                     @csrf
 
                     <div class="grid grid-cols-2 gap-4">

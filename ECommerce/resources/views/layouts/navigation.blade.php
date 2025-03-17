@@ -33,11 +33,12 @@
                     </x-nav-link>
                     @endif
 
-                    @if(Auth::user() && Auth::user()->is_admin)
-                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                            {{ __('Amministrazione') }}
+                    @if(auth()->check() && auth()->user()->roles->contains('name', 'Admin'))
+                        <x-nav-link :href="route('admin.logs')" :active="request()->routeIs('admin.logs')">
+                            {{ __('Logs') }}
                         </x-nav-link>
                     @endif  
+
                 </div>
 
             </div>
